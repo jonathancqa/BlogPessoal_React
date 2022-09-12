@@ -19,7 +19,7 @@ function ListaPostagem() {
         }
     }, [token])
 
-    async function getPosts() {
+    async function getPost() {
         await busca("/postagens", setPosts, {
             headers: {
                 'Authorization': token
@@ -28,13 +28,13 @@ function ListaPostagem() {
     }
 
     useEffect(() => {
-        getPosts()
+        getPost()
     }, [posts.length])
 
     return (
         <>
             {
-                posts.map(posts => (
+                posts.map(post => (
                     <Box m={2} >
                         <Card variant="outlined">
                             <CardContent>
@@ -42,26 +42,26 @@ function ListaPostagem() {
                                     Postagens
                                 </Typography>
                                 <Typography variant="h5" component="h2">
-                                    {posts.titulo}
+                                    {post.titulo}
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    {posts.texto}
+                                    {post.texto}
                                 </Typography>
                                 <Typography variant="body2" component="p">
-                                    {posts.tema?.descricao}
+                                    {post.tema?.descricao}
                                 </Typography>
                             </CardContent>
                             <CardActions>
                                 <Box display="flex" justifyContent="center" mb={1.5}>
 
-                                    <Link to={`/formularioPostagem/${posts.id}`} className="text-decorator-none" >
+                                    <Link to={`/formularioPostagem/${post.id}`} className="text-decorator-none" >
                                         <Box mx={1}>
                                             <Button variant="contained" className="marginLeft" size='small' color="primary" >
                                                 atualizar
                                             </Button>
                                         </Box>
                                     </Link>
-                                    <Link to={`deletarPostagem/${posts.id}`} className="text-decorator-none">
+                                    <Link to={`deletarPostagem/${post.id}`} className="text-decorator-none">
                                         <Box mx={1}>
                                             <Button variant="contained" size='small' color="secondary">
                                                 deletar
